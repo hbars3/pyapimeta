@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -19,12 +19,6 @@ class ChawyLog(db.Model):
 
 with app.app_context():
     db.create_all()
-
-    prueba1 = ChawyLog(text='Mensaje de prueba 1')
-    prueba2 = ChawyLog(text='Mensaje de prueba 2')
-    db.session.add(prueba1)
-    db.session.add(prueba2)
-    db.session.commit()
 
 
 def sort_by_datetime(registers):
@@ -48,6 +42,34 @@ def add_log_message(text):
     db.session.commit()
 
 # add_log_message("Test 1")
+
+
+TOKEN = "tocket-poc"
+
+@app.route('/webhook', methods=['GET', 'POST'])
+def webhook():
+    if request.method == 'GET':
+        challenge = verify_token(request)
+        return challenge
+    elif request.method == 'POST':
+        response = receive_messages(request)
+        return response
+
+
+def verify_token(req):
+    token = req.args.get('hub.verify_token')
+    challenge = req.args.get('hub.challenge')
+
+    if challenge and token == TOKEN:
+        return challenge
+    else:
+        return jsonify({'error': 'Invalid Token'}), 401
+
+
+def receive_messages(req):
+    req = req.get_json()
+    add_log_message(req)
+    return jsonify({'message': 'EVENT_RECEIVED'})
 
 
 if __name__ == '__main__':
