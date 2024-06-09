@@ -1,0 +1,39 @@
+{
+    "object": "whatsapp_business_account",
+    "entry": [
+        {
+            "id": "337163486140932",
+            "changes": [
+                {
+                    "value": {
+                        "messaging_product": "whatsapp",
+                        "metadata": {
+                            "display_phone_number": "15556145402",
+                            "phone_number_id": "323791720814704"
+                        },
+                        "contacts": [
+                            {
+                                "profile": {
+                                    "name": "Herbert Arias"
+                                },
+                                "wa_id": "51946378917"
+                            }
+                        ],
+                        "messages": [
+                            {
+                                "from": "51946378917",
+                                "id": "wamid.HBgLNTE5NDYzNzg5MTcVAgASGBYzRUIwOTE5OUQ4MDE1RTVBODdEQkJGAA==",
+                                "timestamp": "1717958100",
+                                "text": {
+                                    "body": "Hola"
+                                },
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    "field": "messages"
+                }
+            ]
+        }
+    ]
+}
