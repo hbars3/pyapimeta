@@ -76,7 +76,7 @@ def receive_messages(req):
         value = changes['value']
         # message_object = value['messages']
         message_object = req['entry'][0]['changes'][0]['value']['messages']
-        add_log_message(message_object)
+        add_log_message(str(message_object))
         return jsonify({'message': 'EVENT_RECEIVED'})
     except Exception as e:
         return jsonify({'message': 'EVENT RECEIVED'})
